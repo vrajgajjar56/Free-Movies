@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer - Free Movies</title>
+    <link rel="icon" href="C:\Users\Vraj Gajjar\FreeMovies\images\FreeMoviesLogo.png" type="image/x-icon">
+    <script>
+        (function () {
+            try {
+                const navType = performance.getEntriesByType("navigation")[0]?.type;
+                if (navType === 'back_forward' || sessionStorage.getItem('navigationDirection') === 'back') {
+                    document.documentElement.classList.add('nav-back');
+                }
+                sessionStorage.removeItem('navigationDirection');
+            } catch (e) { }
+        })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --marvel-red: #ed1d24;
+            --dc-blue: #0476f2;
+            --marvel-dark: #151515;
+            --marvel-darker: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--marvel-darker);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .marvel-font {
+            font-family: 'Bebas Neue', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .marvel-red {
+            color: var(--marvel-red);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--marvel-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .marvel-logo {
+            text-shadow: 0 0 10px var(--marvel-red), 0 0 30px var(--marvel-red), 0 0 50px var(--marvel-red);
+        }
+
+        .search-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(237, 29, 36, 0.3);
+        }
+
+        .search-bar:focus {
+            border-color: var(--marvel-red);
+            outline: none;
+            box-shadow: 0 0 15px rgba(237, 29, 36, 0.3);
+        }
+    </style>
+    <style>
+        /* Page Transition Animations */
+        html,
+        body {
+            overflow-x: hidden;
+            background-color: #0b0b0b;
+        }
+
+        body {
+            visibility: hidden;
+            opacity: 0;
+            transform: translateX(100vw);
+            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        body.loaded {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        body.exiting {
+            opacity: 0;
+            transform: translateX(-100vw);
+            transition: opacity 0.5s ease-in, transform 0.5s cubic-bezier(0.64, 0, 0.78, 0);
+            pointer-events: none;
+        }
+
+        /* --- STAGGERED COMPONENT SLIDE --- */
+        body header,
+        body main>*,
+        body footer {
+            opacity: 0;
+            transform: translateX(100vw);
+            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        body.loaded header,
+        body.loaded main>*,
+        body.loaded footer {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Entrance Delays */
+        body.loaded header {
+            transition-delay: 0.05s;
+        }
+
+        body.loaded main>*:nth-child(1) {
+            transition-delay: 0.10s;
+        }
+
+        body.loaded footer {
+            transition-delay: 0.15s;
+        }
+
+        body.exiting header,
+        body.exiting main>*,
+        body.exiting footer {
+            opacity: 0;
+            transform: translateX(-100vw);
+            transition: opacity 0.4s ease-in, transform 0.4s ease-in;
+            transition-delay: 0s !important;
+        }
+
+        /* --- BACKWARD NAVIGATION --- */
+        html.nav-back body {
+            opacity: 0;
+            transform: translateX(-100vw);
+        }
+
+        html.nav-back body header,
+        html.nav-back body main>*,
+        html.nav-back body footer {
+            transform: translateX(-100vw);
+        }
+
+        html.nav-back body.loaded {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        html.nav-back body.loaded header,
+        html.nav-back body.loaded main>*,
+        html.nav-back body.loaded footer {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+
+<body class="bg-[#0a0a0a]">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-lg border-b border-red-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2">
+                    <span class="marvel-font text-2xl marvel-red">Free Movies</span>
+                </div>
+
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="nav-link relative text-gray-300 hover:text-white transition">Home</a>
+                    <a href="all-movies.html" class="nav-link relative text-gray-300 hover:text-white transition">All
+                        Movies</a>
+                    <a href="categories.html"
+                        class="nav-link relative text-gray-300 hover:text-white transition">Categories</a>
+                    <a href="disclamer.html" class="nav-link active relative text-white transition">Disclamer</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <input type="text" id="searchInput" placeholder="Search movies..."
+                        class="search-bar px-4 py-2 rounded-full text-sm text-white placeholder-gray-500 w-0 md:w-48 focus:w-64 transition-all duration-300">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-20 px-4 min-h-screen">
+        <div
+            class="max-w-4xl mx-auto bg-black/50 border border-red-900/100 rounded-2xl p-8 md:p-12 shadow-2xl hover:border-red-900/100 transition-all duration-300">
+            <h1 class="marvel-font text-4xl md:text-6xl text-white mb-8 marvel-logo text-center">Website Disclaimer</h1>
+            <div class="space-y-6 text-gray-300 text-lg leading-relaxed">
+                <p>1. This website does not host or store any copyrighted material on its own servers. It just fetches
+                    links from the internet and give the direct link to User without any modification, adds or
+                    redirecting pages.</p>
+                <p>2. All links provided here are of third-party websites that we do not control.</p>
+                <p>3. The content is shared strictly for educational and informational purposes only.</p>
+                <p>4. This platform is intended for promotional and preview purposes only.</p>
+                <p>5. We highly encourage users to support original creators by purchasing content from official
+                    sources.
+                </p>
+                <p>6. If you do not agree with these terms, please exit this website immediately.</p>
+                <p>7. By continuing to use this site, you acknowledge and accept this disclaimer in full.</p>
+                <p>8. All content found here has been sourced from publicly available platforms and believed to be in
+                    the
+                    public domain.</p>
+                <p>9. All trademarks, logos, and brand assets belong to their respective owners.</p>
+                <p>10. Users should delete any downloaded content within 24 hours and obtain original copies from
+                    legitimate
+                    sources.</p>
+                <p>11. If you are a copyright owner or a legal representative and wish to request content removal,
+                    Contact
+                    Us Via <a href="mailto:vrajgajjar56@gmail.com" target="_blank" rel="noopener"
+                        class="text-red-500 hover:underline">Contact Us</a>
+                    page.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-red-900/30 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="marvel-font text-xl marvel-red">Free Movies</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">Your ultimate destination for Free movies!</p>
+                    <p class="text-gray-500 text-sm">Help us to grow by sharing this website with your friends and
+                        family.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-500 text-sm">
+                        <li><a href="index.html" class="hover:text-red-500 transition">Home</a></li>
+                        <li><a href="categories.html" class="hover:text-red-500 transition">Categories</a></li>
+                        <li><a href="disclamer.html" class="hover:text-red-500 transition">Disclamer</a></li>
+                        <li><a href="mailto:vrajgajjar56@gmail.com?subject=Movie%20Request%20for%20Free%20Movies&body=Hello%20Vraj%2C%0A%0AI%20would%20like%20to%20request%20the%20following%20movie%3A%0A%0AMovie%20Name%3A%20%0ARelease%20Year%3A%20%0A%0AThank%20you!"
+                                target="_blank" rel="noopener noreferrer" class="hover:text-red-500 transition">Request
+                                Movie</a></li>
+                    </ul>
+                </div>
+                <div id="categories">
+                    <h4 class="font-bold text-white mb-4">Categories</h4>
+                    <ul class="space-y-2 text-gray-500 text-sm">
+                        <li><a href="mcu.html" class="hover:text-red-500 transition">MCU</a></li>
+                        <li><a href="dcu.html" class="hover:text-blue-500 transition">DC Universe</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-500 text-sm">
+                        <li>
+                            <a href="mailto:vrajgajjar56@gmail.com" target="_blank" rel="noopener noreferrer"
+                                class="hover:text-red-500 transition">📧 Contact
+                                Us</a>
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/@CLASHINGVRAJ" class="hover:text-red-500 transition"
+                                target="_blank" rel="noopener noreferrer">🔗 CLASHING VRAJ</a>
+                        </li>
+                        <li>🌐 India</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-red-900/30 pt-8 text-center">
+                <p class="text-gray-500 text-sm">© 2026 Free Movies. All Rights Reserved. Not affiliated with Marvel
+                    Studios or Disney.</p>
+                <p class="text-gray-600 text-xs mt-2">This is a fan-made website for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            // Redirect to all-movies.html on Enter
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const searchTerm = e.target.value;
+                    if (searchTerm.trim() !== '') {
+                        window.location.href = `all-movies.html?search=${encodeURIComponent(searchTerm)}`;
+                    } else {
+                        window.location.href = `all-movies.html`;
+                    }
+                }
+            });
+        }
+    </script>
+    <script src="router.js"></script>
+</body>
+
+</html>
